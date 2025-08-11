@@ -1,0 +1,15 @@
+﻿@model StudentManagementApp1.Models.Student
+
+<h1>Student Add</h1>
+<form action="Create" method="post">
+	<label >Id</label>
+	<input asp-for="ID" type="number" />
+
+	<label>Name</label>
+	<input asp-for="Name" type="text" />
+
+	<label>Email</label>
+	<input asp-for="Email" type="text" />
+
+	<button type="submit">Add</button>
+	</form>
