@@ -3,7 +3,9 @@
 <h1 class="mb-4">Student List</h1>
 
 <a asp-action="Create" class="btn btn-primary mb-3">➕ Add Student</a>
-
+@{
+    int tmp = 0;
+}
 <table class="table table-bordered table-striped table-hover">
     <thead class="table-dark">
         <tr>
@@ -16,7 +18,7 @@
         @foreach (var s in Model)
         {
             <tr>
-                <td>@s.ID</td>
+                <td>@(++tmp)</td>
                 <td>@s.Name</td>
                 <td>@s.Email</td>
             </tr>
