@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Reflection.Metadata.Ecma335;
+using AspNetCoreGeneratedDocument;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentManagementApp1.Data;
 using StudentManagementApp1.Models;
@@ -51,6 +53,28 @@ namespace StudentManagementApp1.Controllers
                 return RedirectToAction("Index");
             }
             return View(student);
+        }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return NotFound();
+            var student = await _context.students.FirstOrDefaultAsync(m => m.ID == id);
+            if ((student == null)) return NotFound();
+
+            return View(student);
+        }
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var student = await _context.students.FindAsync(id);
+            if (student != null)
+            {
+                _context.students.Remove(student);
+
+                await _context.SaveChangesAsync();
+            }
+           
+            return RedirectToAction("Index");
+
         }
         private IActionResult NotFound()
         {
