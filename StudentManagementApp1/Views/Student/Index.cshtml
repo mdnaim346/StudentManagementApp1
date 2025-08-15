@@ -12,6 +12,7 @@
             <th>Id</th>
             <th>Name</th>
             <th>Email</th>
+            <th>CourseName</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -22,6 +23,7 @@
                 <td>@(++tmp)</td>
                 <td>@s.Name</td>
                 <td>@s.Email</td>
+                <td>@s.Course?.CourseName</td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@s.ID" class="btn btn-warning"> Edit</a>
                     <a asp-action="Delete" asp-route-id="@s.ID" class="btn bnt-warning">Delete</a>

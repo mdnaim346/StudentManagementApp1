@@ -1,0 +1,26 @@
+﻿@model IEnumerable<StudentManagementApp1.Models.Course>
+
+<h1>Course List</h1>
+@{
+	int tmp = 0;
+}
+
+<table>
+
+ <thead>
+	 <tr>
+		 <th>CourseId</th>
+		 <th>CourseName</th>
+	 </tr>
+ </thead>
+ <tbody>
+	 @foreach(var course in Model){
+			<tr>
+				<td>@(++tmp)</td>
+				<td>@course.CourseName</td>
+			</tr>
+
+	 }
+	
+ </tbody>
+</table>

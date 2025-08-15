@@ -10,5 +10,10 @@
 	<label>Email</label>
 	<input asp-for="Email" type="text" />
 
+	<label asp-for="CourseId" class="control-label"></label>
+	<select asp-for="CourseId" class="form-control" asp-items="ViewBag.Courses">
+		<option>Select__</option>
+	</select>
+
 	<button type="submit">Add</button>
 	</form>

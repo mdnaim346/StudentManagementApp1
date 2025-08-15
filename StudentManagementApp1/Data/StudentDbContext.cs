@@ -9,6 +9,15 @@ namespace StudentManagementApp1.Data
         }
 
         public DbSet<Student> students { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Student>()
+                .HasOne(s => s.Course)
+                .WithMany(c => c.Students)
+                .HasForeignKey(s => s.CourseId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
 
     }
 }

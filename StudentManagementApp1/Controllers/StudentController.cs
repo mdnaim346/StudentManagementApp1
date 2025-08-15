@@ -1,6 +1,7 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using AspNetCoreGeneratedDocument;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using StudentManagementApp1.Data;
 using StudentManagementApp1.Models;
@@ -11,6 +12,7 @@ namespace StudentManagementApp1.Controllers
     {
         private readonly StudentDbContext _context;
 
+       
 
         public StudentController(StudentDbContext context)
         {
@@ -22,14 +24,21 @@ namespace StudentManagementApp1.Controllers
         }
         public IActionResult Create()
         {
+            ViewBag.CourseId = new SelectList(_context.Courses, "Id", "Name");
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(Student student)
         {
-            _context.students.Add(student);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _context.students.Add(student);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            ViewBag.CourseId = new SelectList(_context.Courses, "Id", "Name", student.CourseId);
+            return View(student);
+           
         }
         public async Task<IActionResult> Edit(int? id)
         {
